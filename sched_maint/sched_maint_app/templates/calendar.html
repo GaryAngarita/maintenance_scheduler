@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Here is your full maintenance schedule for {{ current }}:</h1>
+    <h4>Check the color key below in case of confusion.</h4>
+
+    <table style="width: auto;">
+        <tr>
+            <th>Number</th>
+            <th>Item</th>
+            <th>Notification Date</th>
+            <th>Color</th>
+        </tr>
+        {% for instance in instances %}
+        <tr>
+            <td>{{instance.id}}</td>
+            <td>{{instance.maintenance}}</td>
+            <td>{{ new_date }}</td>
+            {% if new_date <= 5 %}
+            <td id="red_fill">{{activity}}</td>
+            {% elif new_date <= 15 %}
+            <td id="orange_fill">{{activity}}</td>
+            {% elif new_date <= 30 %}
+            <td id="yellow_fill">{{activity}}</td>
+            {% elif new_date > 30 %}
+            <td id="green_fill">{{activity}}</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    
+    </table>
+</body>
+</html>

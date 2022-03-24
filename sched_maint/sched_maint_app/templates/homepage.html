@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Here you will enter the date of what you want tracked.</p>
+    <p>There are different maintenance intervals for different items.</p>
+    <p>For instance, toothbrushes are recommended - by the American Dental Association - to be replaced every three months. Whereas, 
+        engine oil is still recommended to be replaced every six months.</p>
+    <p>I hope this helps you as much as it helps me</p>
+    <div id="setup">
+        <form action="/setup" method="POST">
+            {% csrf_token %}
+            <label for="maintenance" class="form-label">Maintenance items</label>
+            <select class="form-select" aria-label="Default select example" name="maintenance">
+                <option selected>Select a maintenance item</option>
+                <option value="Toothbrushes">Toothbrushes</option>
+                <option value="Engine oil">Engine oil</option>
+                <option value="Engine air filter">Engine air filter</option>
+                <option value="Cabin air filter">Cabin air filter</option>
+                <option value="House air filter">House air filter</option>
+                <option value="Kitchen sponge">Kitchen sponge</option>
+                <option value="Wash bedding">Wash bedding</option>
+                <option value="House air filter">House air filter</option>
+                <option value="Rotate tires">Rotate tires</option>
+            </select>
+            <label for="interval" class="form_label">Interval</label>
+            <select class="form-select" aria-label="Default select example" name="interval">
+                <option selected>Select an interval</option>
+                <option value="30">One month</option>
+                <option value="60">Two months</option>
+                <option value="90">Three months</option>
+                <option value="120">Four months</option>
+                <option value="150">Five months</option>
+                <option value="180">Six months</option>
+                <option value="270">Nine months</option>
+                <option value="365">Twelve months</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form> 
+    </div>
+    {% if 'instance' in request.session %}
+    <div id="complete">
+        <table style="width:auto">
+            <tr>
+                <th>Number</th>
+                <th>Item</th>           
+                <th>Interval</th>
+            </tr>
+            <tr>
+                {% for instance in instances %}
+                <td>{{instance.id}}</td>
+                {% endfor %}
+                {% for instance in instances %}
+                <td>{{instance.maintenance}}</td>
+                {% endfor %}
+                {% for timing in timings %}
+                <td>{{timing.interval}} days</td>
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
+    {% endif %}
+    {% if 'instance' in request.session %}
+    <div id="calendar">
+        <a href="/next_page/{instance_id}">Full Maintenance Schedule</a>
+    </div>
+    {% endif %}
+    <div id="logout">
+        <a href="/logout">Restart</a>
+    </div>
+</body>
+</html>
