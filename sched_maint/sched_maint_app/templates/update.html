@@ -17,13 +17,13 @@
     <p>I hope this helps you as much as it helps me, {{ user.first_name }}.</p>
     <p><span>Ex: Jordan Wash bedding 1 month; My Toothbrush 3 months; Dad Engine Air Filter 6 months</span></p>
     <div id="setup">
-        <form action="/instance/{{user.id}}" method="POST">
+        <form action="/update/{{instance.id}}" method="POST">
             {% csrf_token %}
             <label for="inputPassword" class="col-sm-2 col-form-label">Owner</label>
-            <input type="text" class="form-control" id="inputPassword" placeholder="Give a name" name="owner">
+            <input type="text" class="form-control" id="inputPassword" value="{{instance.owner}}" name="owner">
             <label for="maintenance" class="form-label">Maintenance items</label>
             <select class="form-select" aria-label="Default select example" name="maintenance">
-                <option selected>Select a maintenance item</option>
+                <option selected>{{instance.maintenance}}</option>
                 <option value="Toothbrush">Toothbrush</option>
                 <option value="Engine oil">Engine oil</option>
                 <option value="Engine air filter">Engine air filter</option>
@@ -36,7 +36,7 @@
             </select>
             <label for="interval" class="form_label">Interval</label>
             <select class="form-select" aria-label="Default select example" name="interval">
-                <option selected>Select an interval</option>
+                <option selected>Only change if you want to reset the due date</option>
                 <option value="30">One month</option>
                 <option value="60">Two months</option>
                 <option value="90">Three months</option>
@@ -49,35 +49,6 @@
             <button type="submit" class="btn btn-primary">Submit</button>
 
         </form> 
-    </div>
-    {% if user.user_insts.all %}
-    <div id="complete">
-        <table style="width:auto" class="table table-bordered">
-            <tr>
-                <th>Owner</th>
-                <th>Item</th>           
-                <th>Interval</th>
-                <th>Remove</th>
-                <th>Edit</th>
-            </tr>
-            {% for instance in user.user_insts.all %}
-            <tr>
-                <td>{{instance.owner}}</td>
-                <td>{{instance.maintenance}}</td>
-                <td>{{instance.interval}} days</td>
-                <td><a href="/delete/{{instance.id}}">Delete</a></td>
-                <td><a href="/edit_page/{{instance.id}}">Update</a></td>
-            </tr>
-            {% endfor %}
-        </table>        
-        <h5>Only Edit if you want to change the Interval. Otherwise, Delete and create a new one</h5>
-    </div>
-    <div id="calendar">
-        <a href="/next_page/{{user.id}}">Full Maintenance Schedule</a>
-    </div>
-    {% endif %}
-    <div id="logout">
-        <a href="/logout">Logout</a>
     </div>
 </body>
 </html>

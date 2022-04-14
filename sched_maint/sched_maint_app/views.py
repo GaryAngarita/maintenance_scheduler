@@ -1,44 +1,122 @@
-import datetime
+from datetime import datetime
+from datetime import timedelta
+from datetime import date
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from .models import *
 
 def index(request):
-    return render(request, 'homepage.html')
+    return render(request, 'index.html')
 
-def setup(request):
-    instance = Instance.objects.create(maintenance = request.POST['maintenance']) 
-    timing = Timing.objects.create(interval = request.POST['interval'], instance = instance)
-    request.session['instance'] = instance.id
-    print(instance)
-    print(timing)
-    return redirect(f'/add_maint/{instance.id}')
+def logreg(request):
+    return render(request, 'logreg.html')
 
-def add_maint(request, instance_id):
-    if 'instance' in request.session:
-        instance = Instance.objects.get(id = instance_id)
-        timing = Timing.objects.get(instance = instance)
+def register(request):
+    errors = User.objects.reg_validator(request.POST)
+    if errors:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect('/logreg')
+    else:
+        password = request.POST['password']
+        pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+        print(password)
+        print(pw_hash)
+        user = User.objects.create(first_name = request.POST['first_name'], 
+        last_name = request.POST['last_name'], 
+        email = request.POST['email'], 
+        password = pw_hash)
+        messages.success(request, "Registration successful!")
+        request.session['id'] = user.id
+    return redirect(f'/start_maint/{user.id}')
+
+def login(request):
+    if request.method == "GET":
+        return redirect('/')
+    errors = User.objects.log_validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect('/logreg')
+    else:
+        password = request.POST['password']
+        pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+        print(password)
+        print(pw_hash)
+        user = User.objects.get(email = request.POST['email'])
+        request.session['id'] = user.id
+        return redirect(f'/start_maint/{user.id}')
+
+def start_maint(request, user_id):
+    if 'id' in request.session:
+        user = User.objects.get(id = user_id)
         context = {
-            'instances': Instance.objects.all(),
-            # 'timing': timing,
-            'timings': Timing.objects.all()
+            'user': user
         }
         return render(request, 'homepage.html', context)
+    else:
+        return redirect('/')
 
-def next_page(request, instance_id):
-    if 'instance' in request.session:
+def instance(request, user_id):
+    if 'id' in request.session:
+        user = User.objects.get(id = user_id)
+
+        instance = Instance.objects.create(owner = request.POST['owner'], 
+        maintenance = request.POST['maintenance'], 
+        interval = request.POST['interval'],
+        date_due = date.today() + timedelta(days=int(request.POST['interval'])),
+        user = user)
+        print(f"Today is {datetime.today()}")
+        print(f"Due date is {instance.date_due}")
+        request.session['id'] = user.id
+        request.session['instance'] = instance.id
+        return redirect(f'/start_maint/{user.id}')
+    else:
+        return redirect('/logreg')
+
+def delete(request, instance_id):
+    user = User.objects.get(id = request.session['id'])
+    indiv_inst = Instance.objects.get(id = instance_id)
+    indiv_inst.delete()
+    request.session['id'] = user.id
+    return redirect(f'/start_maint/{user.id}')
+
+def edit_page(request, instance_id):
+    user = User.objects.get(id = request.session['id'])
+    instance = Instance.objects.get(id = instance_id)
+    context = {
+        "user": user,
+        "instance": instance
+    }
+    return render(request, "update.html", context)
+
+def update(request, instance_id):
+    user = User.objects.get(id = request.session['id'])
+    inst = Instance.objects.get(id = instance_id)
+    inst.owner = request.POST['owner']
+    inst.maintenance = request.POST['maintenance']
+    if request.POST['interval'] == str:
+        pass
+    else:
+        inst.interval = request.POST['interval']
+        inst.date_due = date.today() + timedelta(days=int(request.POST['interval']))
+    inst.save()
+    request.session['id'] = user.id
+    return redirect(f'/start_maint/{user.id}')
+
+# ****************************************************************
+
+
+
+def next_page(request, user_id):
+    if 'id' in request.session:
         activity = ""
-
-        instances = Instance.objects.get(id = instance_id)
-        single_interval = instances.interval
+        user = User.objects.get(id = user_id)
         single_instance = request.session['instance']
-        # each_int = Instance.objects.get(id = single_instance)
-
-        curr_date_temp = datetime.datetime(2022, 3, 22)
-        full_date = curr_date_temp.strftime("%b %d %Y")
-        # today = datetime.today()
-        for single_interval in instances:
-            print(single_interval)
-            new_date = full_date - datetime.timedelta(days=single_interval)
+        today = date.today()
+        for instance in user.user_insts.all():
+            print(instance.id)
+            new_date = abs(today - instance.date_due).days
             if new_date <= 3:
                 str = "The time is now"
             elif new_date <= 7:
@@ -49,12 +127,12 @@ def next_page(request, instance_id):
                 str = "Just about a month. Getting close"
             else:
                 str = "Plenty of time"
-
-        activity.append(0, str)
+            print(new_date)
+        activity = str
         context = {
-            "current": full_date,
-            "instances": instances,
-            # "today": today,
+            'user': user,
+            "current": today,
+            "new_date": new_date,
             "activity": activity
         }
         return render(request, "calendar.html", context)
