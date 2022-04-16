@@ -64,7 +64,8 @@ def instance(request, user_id):
         instance = Instance.objects.create(owner = request.POST['owner'], 
         maintenance = request.POST['maintenance'], 
         interval = request.POST['interval'],
-        date_due = date.today() + timedelta(days=int(request.POST['interval'])),
+        date_due = date.today() + timedelta(days=int(request.POST['interval'])), 
+        status = "", 
         user = user)
         print(f"Today is {datetime.today()}")
         print(f"Due date is {instance.date_due}")
@@ -104,15 +105,12 @@ def update(request, instance_id):
     request.session['id'] = user.id
     return redirect(f'/start_maint/{user.id}')
 
-# ****************************************************************
-
+# Need to fix activity.status update problem
 
 
 def next_page(request, user_id):
     if 'id' in request.session:
-        activity = ""
         user = User.objects.get(id = user_id)
-        single_instance = request.session['instance']
         today = date.today()
         for instance in user.user_insts.all():
             print(instance.id)
@@ -128,12 +126,13 @@ def next_page(request, user_id):
             else:
                 str = "Plenty of time"
             print(new_date)
-        activity = str
+            print(instance.status)
+            instance.status = str
+            instance.save()
         context = {
             'user': user,
             "current": today,
-            "new_date": new_date,
-            "activity": activity
+            "new_date": new_date
         }
         return render(request, "calendar.html", context)
     else:

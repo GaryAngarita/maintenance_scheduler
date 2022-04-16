@@ -64,12 +64,12 @@ class Instance(models.Model):
     user = models.ForeignKey(User, related_name='user_insts', on_delete=CASCADE)
     owner = models.CharField(max_length=255, blank=False, null=False)
     maintenance = models.CharField(max_length=255)
-    interval = models.IntegerField(error_messages={'required': 'Required'})
-    date_due = models.DateField()
+    interval = models.IntegerField(error_messages={'required': 'Required'}, blank=False)
+    date_due = models.DateField(blank=False)
+    status = models.CharField(max_length=255, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'Instance({self.maintenance},{self.interval})'
-
 # Create your models here.

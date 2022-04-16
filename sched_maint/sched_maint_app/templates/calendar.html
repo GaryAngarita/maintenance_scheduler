@@ -26,14 +26,16 @@
             <td>{{ instance.owner }}</td>
             <td>{{ instance.maintenance }}</td>
             <td>{{ instance.date_due }}</td>
-            {% if new_date <= 5 %}
-            <td id="red_fill">{{activity}}</td>
-            {% elif new_date <= 15 %}
-            <td id="orange_fill">{{activity}}</td>
-            {% elif new_date <= 30 %}
-            <td id="yellow_fill">{{activity}}</td>
-            {% elif new_date > 30 %}
-            <td id="green_fill">{{activity}}</td>
+            {% if instance.status == "The time is now" %}
+            <td id="red_fill">{{instance.status}}</td>
+            {% elif instance.status == "Within a week" %}
+            <td id="orange_fill">{{instance.status}}</td>
+            {% elif instance.status == "About two weeks left" %}
+            <td id="yellow_fill">{{instance.status}}</td>
+            {% elif instance.status == "Just about a month. Getting close" %}
+            <td id="green_fill">{{instance.status}}</td>
+            {% elif instance.status == "Plenty of time" %}
+            <td id="blue_fill">{{instance.status}}</td>
             {% endif %}
         </tr>
         {% endfor %}
