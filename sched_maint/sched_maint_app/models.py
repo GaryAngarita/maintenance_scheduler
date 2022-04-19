@@ -5,6 +5,7 @@ import bcrypt
 from django.db import models
 
 email_regex = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+num_regex = re.compile(r'^\-?[1-9][0-9]*$')
 
 class UserManager(models.Manager):
     def reg_validator(self, postData):
@@ -59,16 +60,39 @@ class User(models.Model):
         def __str__(self):
             return self.first_name, self.last_name
         
+class InstanceManager(models.Manager):
+    def inst_validator(self, postData):
+        errors = {}
+        good_entry = re.match(num_regex,postData['interval'])
+        if len(postData['owner']) == 0:
+            errors['no_owner'] = 'Owner field cannot be blank'
+        if len(postData['maintenance']) == 0:
+            errors['no_maint'] = 'You must select a maintenance task or create your own'
+        if len(postData['interval']) == 0:
+            errors['no_int'] = 'An interval must be entered'
+        if not good_entry:
+            errors['not_num'] = 'Only numbers allowed for interval'
+        return errors
+
+    def edit_validator(self, postData):
+        errors = {}
+        good_entry = re.match(num_regex,postData['interval'])
+        if len(postData['interval']) == 0:
+            errors['no_int'] = 'An interval must be entered'
+        if not good_entry:
+            errors['not_num'] = 'Only numbers allowed for interval'
+        return errors
 
 class Instance(models.Model):
     user = models.ForeignKey(User, related_name='user_insts', on_delete=CASCADE)
-    owner = models.CharField(max_length=255, blank=False, null=False)
+    owner = models.CharField(max_length=255)
     maintenance = models.CharField(max_length=255)
     interval = models.IntegerField(error_messages={'required': 'Required'}, blank=False)
     date_due = models.DateField(blank=False)
     status = models.CharField(max_length=255, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = InstanceManager()
 
     def __str__(self):
         return f'Instance({self.maintenance},{self.interval})'

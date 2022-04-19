@@ -26,11 +26,15 @@
             <td>{{ instance.owner }}</td>
             <td>{{ instance.maintenance }}</td>
             <td>{{ instance.date_due }}</td>
-            {% if instance.status == "The time is now" %}
+            {% if instance.status == "It's past due. Get on it!" %}
+            <td id="black_fill">{{instance.status}}</td>
+            {% elif instance.status == "Today's the day. Make it happen" %}
             <td id="red_fill">{{instance.status}}</td>
+            {% elif instance.status == "The time is now" %}
+            <td id="red_outline">{{instance.status}}</td>
             {% elif instance.status == "Within a week" %}
             <td id="orange_fill">{{instance.status}}</td>
-            {% elif instance.status == "About two weeks left" %}
+            {% elif instance.status == "Under two weeks left" %}
             <td id="yellow_fill">{{instance.status}}</td>
             {% elif instance.status == "Just about a month. Getting close" %}
             <td id="green_fill">{{instance.status}}</td>
@@ -42,5 +46,8 @@
     
     </table>
     <a href="/start_maint/{{user.id}}">Go Back</a>
+    <div id="logout">
+        <a href="/logout">Logout</a>
+    </div>
 </body>
 </html>

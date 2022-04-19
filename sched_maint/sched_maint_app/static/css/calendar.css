@@ -1,5 +1,14 @@
+#black_fill{
+    background-color: black;
+    color: white;
+}
+
 #red_fill{
-    background: red;
+    background-color: red;
+}
+
+#red_outline{
+    border: 5px red solid;
 }
 
 #orange_fill{
