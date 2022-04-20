@@ -119,7 +119,6 @@ def update(request, instance_id):
         request.session['id'] = user.id
         return redirect(f'/start_maint/{user.id}')
 
-# Need to fix activity.status update problem
 
 
 def next_page(request, user_id):

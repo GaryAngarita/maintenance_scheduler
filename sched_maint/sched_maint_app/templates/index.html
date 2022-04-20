@@ -1,12 +1,243 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1><a href="/logreg">Login</a></h1>
-</body>
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Profile Resume</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  </head>
+  <body>
+
+    <!-- Start Top Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Profile Resume</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto"></ul>
+                <span class="navbar-text">
+                    <a href="/logreg">Register</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/media">Media</a>
+                    <a href="/recommend">Recommendations</a>
+                </span>
+            </div>
+        </div>
+    </nav><!-- /NAVBAR -->
+    <!-- End Top Bar -->
+
+
+    <!-- <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit>
+      <ul class="orbit-container">
+        <button class="orbit-previous" aria-label="previous"><span class="show-for-sr">Previous Slide</span>&#9664;</button>
+        <button class="orbit-next" aria-label="next"><span class="show-for-sr">Next Slide</span>&#9654;</button>
+        <li class="orbit-slide is-active">
+          <img src="https://placehold.it/2000x750">
+        </li>
+        <li class="orbit-slide">
+          <img src="https://placehold.it/2000x750">
+        </li>
+        <li class="orbit-slide">
+          <img src="https://placehold.it/2000x750">
+        </li>
+        <li class="orbit-slide">
+          <img src="https://placehold.it/2000x750">
+        </li>
+      </ul>
+    </div> -->
+
+    <div class="row column text-center">
+      <br>
+      <h1>Tired of forgetting when you:</h1>
+      <h1>Changed a filter?</h1>
+      <h2>Replaced your toothbrushes?</h2>
+      <h3>Rotated your tires?</h3>
+      <h4>Changed the bedsheets?</h4>
+      <h5>Defragged your computer?</h5>
+      <h6>Or any number of other important periodic tasks?</h6>
+      <hr>
+    </div>
+
+    <div id="pics" class="row small-up-2 large-up-4">
+      <div class="column">
+        <img class="img-fluid" src="{% static 'img/Resume_template1_v3.jpg' %}">
+        <h5>Profile picture in the background</h5>
+        <p><a href="/logreg" class="button expanded">Create Account</a></p>
+      </div>
+      <div class="column">
+        <img class="img-fluid" src="{% static 'img/Background_picture_template2_v3.jpg' %}">
+        <h5>Profile picture front and center</h5>
+        <p><a href="/logreg" class="button expanded">Create Account</a></p>
+      </div>
+      <div class="column">
+        <img class="img-fluid" src="{% static 'img/Background_picture_template3_v1.jpg' %}">
+        <h5>Interactive resume with profile picture</h5>
+        <p><a href="/logreg" class="button expanded">Create Account</a></p>
+      </div>
+      <div class="column">
+        <img class="img-fluid" src="{% static 'img/Background_picture_template4_v1.jpg' %}">
+        <h5>Ol Reliable</h5>
+        <p><a href="/logreg" class="button expanded">Create Account</a></p>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row column">
+      <div class="callout primary">
+        <h3>Don't wait! Make your resume standout today!</h3>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row column text-center">
+      <h2>Templates will be updated and added periodically</h2>
+      <hr>
+    </div>
+
+    <!-- <div class="row small-up-2 medium-up-3 large-up-6">
+      <div class="column">
+        <img class="thumbnail" src="https://placehold.it/300x400">
+        <h5>Nulla At Nulla Justo, Eget</h5>
+        <p>$400</p>
+        <a href="#" class="button small expanded hollow">Buy</a>
+      </div>
+      <div class="column">
+        <img class="thumbnail" src="https://placehold.it/300x400">
+        <h5>Nulla At Nulla Justo, Eget</h5>
+        <p>$400</p>
+        <a href="#" class="button small expanded hollow">Buy</a>
+      </div>
+      <div class="column">
+        <img class="thumbnail" src="https://placehold.it/300x400">
+        <h5>Nulla At Nulla Justo, Eget</h5>
+        <p>$400</p>
+        <a href="#" class="button small expanded hollow">Buy</a>
+      </div>
+      <div class="column">
+        <img class="thumbnail" src="https://placehold.it/300x400">
+        <h5>Nulla At Nulla Justo, Eget</h5>
+        <p>$400</p>
+        <a href="#" class="button small expanded hollow">Buy</a>
+      </div>
+      <div class="column">
+        <img class="thumbnail" src="https://placehold.it/300x400">
+        <h5>Nulla At Nulla Justo, Eget</h5>
+        <p>$400</p>
+        <a href="#" class="button small expanded hollow">Buy</a>
+      </div>
+      <div class="column">
+        <img class="thumbnail" src="https://placehold.it/300x400">
+        <h5>Nulla At Nulla Justo, Eget</h5>
+        <p>$400</p>
+        <a href="#" class="button small expanded hollow">Buy</a>
+      </div>
+    </div>
+
+    <hr>
+    <div class="row">
+      <div class="medium-4 columns">
+        <h4>Top Products</h4>
+        <div class="media-object">
+          <div class="media-object-section">
+            <img class="thumbnail" src="https://placehold.it/100x100">
+          </div>
+          <div class="media-object-section">
+            <h5>Nunc Eu Ullamcorper Orci</h5>
+            <p>Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque.</p>
+          </div>
+        </div>
+        <div class="media-object">
+          <div class="media-object-section">
+            <img class="thumbnail" src="https://placehold.it/100x100">
+          </div>
+          <div class="media-object-section">
+            <h5>Nunc Eu Ullamcorper Orci</h5>
+            <p>Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque.</p>
+          </div>
+        </div>
+        <div class="media-object">
+          <div class="media-object-section">
+            <img class="thumbnail" src="https://placehold.it/100x100">
+          </div>
+          <div class="media-object-section">
+            <h5>Nunc Eu Ullamcorper Orci</h5>
+            <p>Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque.</p>
+          </div>
+        </div>
+      </div>
+      <div class="medium-4 columns">
+        <h4>Top Products</h4>
+        <div class="media-object">
+          <div class="media-object-section">
+            <img class="thumbnail" src="https://placehold.it/100x100">
+          </div>
+          <div class="media-object-section">
+            <h5>Nunc Eu Ullamcorper Orci</h5>
+            <p>Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque.</p>
+          </div>
+        </div>
+        <div class="media-object">
+          <div class="media-object-section">
+            <img class="thumbnail" src="https://placehold.it/100x100">
+          </div>
+          <div class="media-object-section">
+            <h5>Nunc Eu Ullamcorper Orci</h5>
+            <p>Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque.</p>
+          </div>
+        </div>
+        <div class="media-object">
+          <div class="media-object-section">
+            <img class="thumbnail" src="https://placehold.it/100x100">
+          </div>
+          <div class="media-object-section">
+            <h5>Nunc Eu Ullamcorper Orci</h5>
+            <p>Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque.</p>
+          </div>
+        </div>
+      </div>
+      <div class="medium-4 columns">
+        <h4>Top Products</h4>
+        <div class="media-object">
+          <div class="media-object-section">
+            <img class="thumbnail" src="https://placehold.it/100x100">
+          </div>
+          <div class="media-object-section">
+            <h5>Nunc Eu Ullamcorper Orci</h5>
+            <p>Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque.</p>
+          </div>
+        </div>
+        <div class="media-object">
+          <div class="media-object-section">
+            <img class="thumbnail" src="https://placehold.it/100x100">
+          </div>
+          <div class="media-object-section">
+            <h5>Nunc Eu Ullamcorper Orci</h5>
+            <p>Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque.</p>
+          </div>
+        </div>
+        <div class="media-object">
+          <div class="media-object-section">
+            <img class="thumbnail" src="https://placehold.it/100x100">
+          </div>
+          <div class="media-object-section">
+            <h5>Nunc Eu Ullamcorper Orci</h5>
+            <p>Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque.</p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <footer class="container-fluid bg-4 text-center">
+      <p>Visit Me At: <a href="https://garyangarita.github.io/">GaryAngarita.github.io</a></p>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  </body>
 </html>
