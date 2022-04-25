@@ -8,6 +8,7 @@
     <title>Maintenance Scheduler</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
             // https://dashboard.emailjs.com/admin/integration
@@ -39,16 +40,16 @@
                 <a class="navbar-brand navbar-text" href="/logreg">Maintenance Scheduler</a>
                 <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <a class="nav-link" href="/logreg">Log In</a>
+                    <a class="nav-link" href="/logreg">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/about">About</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/media">Media</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/contact">Contact</a>
                 </li>
                 </ul>
             </nav>
@@ -58,24 +59,27 @@
         <h2>Have a question, comment, or suggestion?</h2>
         <br>
         <div id="contact_temps">
-            <div class="temp_one_two">
-                <form id="contact-form">
-                    <input type="hidden" name="contact_number">
-                    <label>Name</label>
-                    <input type="text" name="user_name">
-                    <label>Email</label>
-                    <input type="email" name="user_email">
-                    <label>Message</label>
-                    <textarea name="message" rows="4" cols="25"></textarea>
-                    <input id="subbut" type="submit" value="Send">
+            <div id="email">
+                <form action="?" method="POST" id="contact-form" class="con_form">
+                  <input type="hidden" name="contact_number" />
+                  <label>Name</label>
+                  <input type="text" name="user_name" />
+                  <label>Email</label>
+                  <input type="email" name="user_email" />
+                  <label>Message</label>
+                  <textarea name="message" rows="4" cols="22.5"></textarea>
+                  <div class="g-recaptcha" data-sitekey="6Le_-J4dAAAAACSIyZDkwRUqR_-08NbS2T3SFkbQ"></div>
+                  <div id="email_button">
+                    <input class="btn btn-outline-danger" type="submit" value="Send" />
+                  </div>
                 </form>
             </div>
             <div class="temp_three_four">
                 <h4>Send post mail to:</h4>
                 <br>
                 <h5>Gary Angarita</h5>
-                <h5>13364 Beach Blvd</h5>
-                <h5>Jacksonville, FL 32224</h5>
+                <h5>6116 Isla St</h5>
+                <h5>Melbourne, FL 32904</h5>
             </div>
         </div>
     </div>

@@ -1,7 +1,3 @@
-#navbar-example2{
-  background-color: gray;
-}
-
 .navbar-custom .navbar-text{
   color: rgb(13 110 219);
 }
@@ -15,12 +11,6 @@ h4, h3{
   height: 550px;
   margin-right: auto;
   margin-left: auto;
-}
-
-footer{
-    display: flex;
-    place-content: center;
-    align-content: center;
 }
 
 p{
@@ -52,4 +42,20 @@ li{
 
 .float-start{
     padding: 10px 0 0 20px;
+}
+
+.bg-4 {
+  background-color: #2f2f2f;
+  color: #ffffff;
+}
+
+.container-fluid {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+footer{
+  display: flex;
+  place-content: center;
+  align-content: center;
 }

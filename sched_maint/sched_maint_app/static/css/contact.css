@@ -31,11 +31,6 @@ li{
     margin: auto;
 }
 
-
-a{
-    padding-right: 10px;
-}
-
 h2, p{
     text-align: center;
 }
@@ -49,6 +44,30 @@ h2, p{
     display: flex;
     place-content: center;
     padding-top: 100px;
+}
+
+#address, #email{
+    width: 236px auto;
+    height: 250px;
+    padding: 0px 20px 0px 20px;
+}
+
+.con_form{
+    width: 236px;
+    height: 250px;
+    padding: 0px 20px 0px 20px;
+}
+
+#address h2, #address p{
+    text-align: center;
+}
+
+#add_content{
+    padding-top: 24px;
+}
+
+#email_button{
+    text-align: center;
 }
 
 .temp_one_two, .temp_three_four{
@@ -68,7 +87,18 @@ h2, p{
     justify-content: center;
 }
 
+.bg-4 {
+    background-color: #2f2f2f;
+    color: #ffffff;
+}
+
+.container-fluid {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
 footer{
+    padding-top: 40px;
     display: flex;
     place-content: center;
     align-content: center;
