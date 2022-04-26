@@ -81,6 +81,10 @@ class InstanceManager(models.Manager):
             errors['no_int'] = 'An interval must be entered'
         if not good_entry:
             errors['not_num'] = 'Only numbers allowed for interval'
+        if len(postData['maintenance']) == 0:
+            errors['no_maint'] = 'You need a maintenance entry'
+        if len(postData['owner']) == 0:
+            errors['no_owner'] = 'Owner field cannot be blank'
         return errors
 
 class Instance(models.Model):

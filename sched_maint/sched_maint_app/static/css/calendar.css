@@ -12,7 +12,7 @@ table{
 }
 
 #red_outline{
-    border: 5px red solid;
+    border: 3px red solid;
 }
 
 #orange_fill{
@@ -29,4 +29,9 @@ table{
 
 #blue_fill{
     background-color: blue;
+}
+
+#calendar{
+    margin-left: auto;
+    margin-right: auto;
 }

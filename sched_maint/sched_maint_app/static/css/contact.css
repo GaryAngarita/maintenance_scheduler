@@ -98,7 +98,6 @@ h2, p{
 }
 
 footer{
-    padding-top: 40px;
     display: flex;
     place-content: center;
     align-content: center;

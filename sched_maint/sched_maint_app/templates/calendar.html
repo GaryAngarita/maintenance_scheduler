@@ -14,12 +14,12 @@
     <h4>Check the color key below in case of confusion.</h4>
     <h4>Today's date: {{ current }}</h4>
 
-    <table style="width:auto; text-align: center;" class="table table-bordered">
+    <table id="calendar" style="width:auto; text-align: center;" class="table table-bordered">
         <tr>
             <th>Owner</th>
             <th>Item</th>
             <th>Due Date</th>
-            <th>Color</th>
+            <th>Status</th>
         </tr>
         {% for instance in user.user_insts.all %}
         <tr>
@@ -42,8 +42,19 @@
             <td id="blue_fill">{{instance.status}}</td>
             {% endif %}
         </tr>
-        {% endfor %}
-    
+        {% endfor %}    
+    </table>
+    <hr>
+    <table class="table table-bordered">
+        <tr>
+            <th id="blue_fill">> 30 days</th>
+            <th id="green_fill">< 30 days but &#8805; 15</th>
+            <th id="yellow_fill">< 15 days but &#8805; 7</th>
+            <th id="orange_fill">< 7 days but &#8805; 3</th>
+            <th id="red_outline">< 3 days but not today</th>
+            <th id="red_fill">Today</th>
+            <th id="black_fill">Past due</th>
+        </tr>
     </table>
     <a href="/start_maint/{{user.id}}">Go Back</a>
     <div id="logout">
