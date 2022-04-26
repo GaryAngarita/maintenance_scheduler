@@ -51,10 +51,12 @@
                 <option value="270">Nine months</option>
                 <option value="365">Twelve months</option>
             </datalist>
-            <button type="submit" class="btn btn-primary">Submit</button>
-
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
         </form> 
     </div>
+    <br>
     {% if user.user_insts.all %}
     <div id="complete">
         <table style="width:auto" class="table table-bordered">
