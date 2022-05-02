@@ -45,7 +45,7 @@
         {% endfor %}    
     </table>
     <hr>
-    <table class="table table-bordered">
+    <table id="second_tbl" class="table table-bordered">
         <tr>
             <th id="blue_fill">> 30 days</th>
             <th id="green_fill">< 30 days but &#8805; 15</th>
@@ -56,9 +56,11 @@
             <th id="black_fill">Past due</th>
         </tr>
     </table>
-    <a href="/start_maint/{{user.id}}">Go Back</a>
-    <div id="logout">
-        <a href="/logout">Logout</a>
-    </div>
+</div>
+    <p id="back"><a href="/start_maint/{{user.id}}">Go Back</a></p>
+</div>
+<div id="logout">
+    <a href="/logout">Logout</a>
+</div>
 </body>
 </html>
