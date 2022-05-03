@@ -9,6 +9,31 @@ table{
     margin-right: auto;
 }
 
-#calendar, #logout, #back{
+#calendar, #logout, #back, h1, p{
     text-align: center;
+}
+
+.navbar-brand{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 20px;
+}
+
+#navbar-example2{
+    background-color: gray;
+}
+  
+.navbar-custom .navbar-text{
+    color: rgb(13 110 219);
+}
+
+#navbarText{
+    justify-content: right;
+}
+
+#leftNav, #navbarText{
+    margin: auto;
+}
+
+span a{
+    padding-right: 10px;
 }

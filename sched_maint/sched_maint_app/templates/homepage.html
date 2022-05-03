@@ -11,26 +11,51 @@
     <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
     <script>
         $( document ).ready(function() {
-
-            $( "#instructions" ).click())
-
-
+        
+        $("#instr").hide();
+        
+        $( "#instructions" ).click(function(){
+            $( "#instr" ).toggle();
+        })
 
         });
-
 
     </script>
 </head>
 <body>
+
+    <div id="container">
+        <div id="top-part">
+        <nav id="navbar-example2" class="navbar navbar-light navbar-custom bg-dark px-3">
+            <a class="navbar-brand navbar-text" href="/logreg">Maintenance Scheduler</a>
+            <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="/logreg">Log In</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/media">Media</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/contact">Contact</a>
+            </li>
+            </ul>
+        </nav>
+      </div><!-- /NAVBAR -->
+
     {% if user.user_insts.all %}
     <h1>Welcome back to Maintenance Scheduler, {{ user.first_name }}</h1>
-    <div id="instructions">Click for instructions
-        <p>Here you will enter the date of what you want tracked.</p>
-        <p>There are different maintenance intervals for different items.</p>
-        <p>For instance, toothbrushes are recommended - by the American Dental Association - to be replaced every three months. Whereas, 
-            engine oil is still recommended to be replaced every six months.</p>
-        <p>I hope this helps you as much as it helps me, {{ user.first_name }}.</p>
-        <p>Ex: Jordan Wash bedding 1 month; My Toothbrush 3 months; Dad Engine Air Filter 6 months</p>
+    <div id="instructions"><p>Click here to toggle instructions</p>
+        <div id="instr">
+            <p>Here you will enter the date of what you want tracked.</p>
+            <p>There are different maintenance intervals for different items.</p>
+            <p>For instance, toothbrushes are recommended - by the American Dental Association - to be replaced every three months. Whereas, 
+                engine oil is still recommended to be replaced every six months.</p>
+            <p>I hope this helps you as much as it helps me, {{ user.first_name }}.</p>
+            <p>Ex: Jordan Wash bedding 1 month; My Toothbrush 3 months; Dad Engine Air Filter 6 months</p>
+        </div>
     </div>
     {% else %}
     <h1>Welcome to Maintenance Scheduler, {{ user.first_name }}</h1>
@@ -111,5 +136,7 @@
     <div id="logout">
         <a href="/logout">Logout</a>
     </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
